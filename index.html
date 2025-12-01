@@ -204,7 +204,7 @@
       const user = authData.user;
 
       // Insert into profiles table
-      const { error: profileErr } = await supabase.from("profiles").insert({
+      const { error: profileErr } = await supabase.from("Profiles").insert({
         id: user.id,
         email,
         grade,
