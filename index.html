@@ -245,6 +245,7 @@
               <a
                 href="#"
                 class="inline-flex items-center rounded-xl bg-indigo-600 px-8 py-3 text-lg font-semibold text-white shadow-lg hover:bg-indigo-500 active:scale-95 transition-all duration-200"
+                id="get_started"
                 >Get started</a
               >
 
@@ -720,5 +721,10 @@
         </div>
       </div>
     </footer>
+    <script>
+      document.getElementById("get_started").addEventListener("click", function () {
+        window.location.href = "signinup.html";
+      });
+    </script>
   </body>
 </html>

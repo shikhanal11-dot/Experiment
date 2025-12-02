@@ -191,31 +191,49 @@
       }
 
       // 🆕 SIGNUP MODE
-      const grade = document.getElementById("grade").value;
-      const school = document.getElementById("school").value;
+const grade = document.getElementById("grade").value;
+const school = document.getElementById("school").value;
 
-      const { data: authData, error: authError } = await supabase.auth.signUp({
-        email,
-        password,
-      });
+// 1️⃣ SIGN UP USER
+const { data: authData, error: authError } = await supabase.auth.signUp({
+  email,
+  password,
+  options: {
+    emailRedirectTo: window.location.origin
+  }
+});
 
-      if (authError) return alert("Signup failed: " + authError.message);
+if (authError) {
+  alert("Signup failed: " + authError.message);
+  return;
+}
 
-      const user = authData.user;
+// 2️⃣ GET THE REAL USER FROM SESSION (IMPORTANT!)
+const { data: sessionData } = await supabase.auth.getSession();
+const user = sessionData.session?.user;
 
-      // Insert into profiles table
-      const { error: profileErr } = await supabase.from("Profiles").insert({
-        id: user.id,
-        email,
-        grade,
-        school,
-        points: 0
-      });
+if (!user) {
+  alert("Please verify your email before creating your profile.");
+  return;
+}
 
-      if (profileErr) return alert("Error creating profile: " + profileErr.message);
+// 3️⃣ INSERT INTO PROFILES
+const { error: profileErr } = await supabase.from("profiles").insert({
+  id: user.id,
+  email,
+  grade,
+  school,
+  points: 0
+});
 
-      alert("Account created successfully!");
-      window.location.href = "dashboard.html";
+if (profileErr) {
+  alert("Error creating profile: " + profileErr.message);
+  return;
+}
+
+alert("Account created successfully!");
+window.location.href = "dashboard.html";
+
     });
 
     window.onload = () => document.getElementById("email").focus();
