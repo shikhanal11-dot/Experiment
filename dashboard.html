@@ -3,33 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Study Quest Dashboard</title>
+    <title>Study Quest • Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
-        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
-      /* Custom animations */
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+      button {
+        cursor: pointer;
       }
-      .animate-fade-in {
-        animation: fadeIn 0.5s ease-in-out;
+      a {
+        text-decoration: none;
       }
     </style>
   </head>
   <body class="bg-gray-900 m-0 p-0 overflow-x-hidden text-white">
-    <!-- NAVBAR LIKE ORIGINAL -->
+    <!-- EXACT SAME NAVBAR AS LANDING PAGE -->
     <header class="absolute inset-x-0 top-0 z-50">
       <nav
         aria-label="Global"
@@ -45,41 +39,92 @@
             />
           </a>
         </div>
+
         <div class="flex lg:hidden">
           <button
             type="button"
             class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-200"
             onclick="document.getElementById('mobile-menu').showModal()"
           >
-            <span class="sr-only">Open main menu</span>
             <svg
-              viewBox="0 0 24 24"
+              class="size-6"
               fill="none"
               stroke="currentColor"
               stroke-width="1.5"
-              data-slot="icon"
-              aria-hidden="true"
-              class="size-6"
             >
               <path
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
               />
             </svg>
           </button>
         </div>
+
         <div class="hidden lg:flex lg:gap-x-12">
           <a
             href="#"
             class="text-lg font-semibold text-white hover:text-indigo-400 hover:underline transition duration-300"
             >Dashboard</a
           >
-          <a
-            href="#"
-            class="text-lg font-semibold text-white hover:text-indigo-400 hover:underline transition duration-300"
-            >Learn</a
-          >
+
+          <div class="relative group">
+            <button
+              class="text-lg font-semibold text-white hover:text-indigo-400 hover:underline transition duration-300 flex items-center gap-1"
+            >
+              Tests
+              <svg
+                class="w-4 h-4 mt-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+            <div
+              class="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-64 bg-gray-800/95 border border-gray-700 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50"
+            >
+              <div class="p-4 grid grid-cols-2 gap-3">
+                <a
+                  href="#"
+                  class="px-4 py-3 text-base font-medium hover:bg-indigo-500/20 rounded-xl transition text-center"
+                  >Math</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-3 text-base font-medium hover:bg-indigo-500/20 rounded-xl transition text-center"
+                  >Physics</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-3 text-base font-medium hover:bg-indigo-500/20 rounded-xl transition text-center"
+                  >Chemistry</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-3 text-base font-medium hover:bg-indigo-500/20 rounded-xl transition text-center"
+                  >Biology</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-3 text-base font-medium hover:bg-indigo-500/20 rounded-xl transition text-center"
+                  >History</a
+                >
+                <a
+                  href="#"
+                  class="px-4 py-3 text-base font-medium hover:bg-indigo-500/20 rounded-xl transition text-center"
+                  >English</a
+                >
+              </div>
+            </div>
+          </div>
+
           <a
             href="#"
             class="text-lg font-semibold text-white hover:text-indigo-400 hover:underline transition duration-300"
@@ -96,48 +141,53 @@
             >About</a
           >
         </div>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-3">
-          <a
-            href="#"
-            class="text-lg font-semibold text-white hover:text-indigo-300 transition-all duration-300"
+
+        <!-- Profile Only -->
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end items-center">
+          <button
+            class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition group"
           >
-            Logout →
-          </a>
+            <img
+              src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff&bold=true"
+              alt="Profile"
+              class="w-10 h-10 rounded-full ring-2 ring-indigo-500/50 group-hover:ring-indigo-400 transition"
+            />
+            <div class="text-left opacity-0 group-hover:opacity-100 transition">
+              <p class="text-sm font-semibold">John Doe</p>
+              <p class="text-xs text-indigo-300">Level 5 • 1,234 pts</p>
+            </div>
+          </button>
         </div>
       </nav>
+
+      <!-- Mobile Menu - Exact copy -->
       <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
         <div tabindex="0" class="fixed inset-0 focus:outline-none">
           <div
             class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-100/10"
           >
-            <!-- Top section: logo + close button -->
             <div class="flex items-center justify-between">
-              <a href="#" class="-m-1.5 p-1.5">
-                <span class="sr-only">Study Quest</span>
-                <img
+              <a href="#" class="-m-1.5 p-1.5"
+                ><img
                   src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
                   alt=""
                   class="h-8 w-auto"
-                />
-              </a>
+              /></a>
               <button
                 type="button"
                 class="-m-2.5 rounded-md p-2.5 text-gray-200"
                 onclick="document.getElementById('mobile-menu').close()"
               >
-                <span class="sr-only">Close menu</span>
                 <svg
-                  viewBox="0 0 24 24"
+                  class="size-6"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="1.5"
-                  aria-hidden="true"
-                  class="size-6"
                 >
                   <path
-                    d="M6 18 18 6M6 6l12 12"
                     stroke-linecap="round"
                     stroke-linejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
                   />
                 </svg>
               </button>
@@ -153,7 +203,7 @@
                   <a
                     href="#"
                     class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-white hover:bg-white/5"
-                    >Learn</a
+                    >Tests</a
                   >
                   <a
                     href="#"
@@ -171,13 +221,6 @@
                     >About</a
                   >
                 </div>
-                <div class="py-6">
-                  <a
-                    href="#"
-                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold text-white hover:bg-white/5"
-                    >Logout</a
-                  >
-                </div>
               </div>
             </div>
           </div>
@@ -185,193 +228,509 @@
       </dialog>
     </header>
 
-    <!-- DASHBOARD CONTENT -->
-    <main class="pt-32 pb-20 px-6 lg:px-8">
+    <!-- FULL DASHBOARD CONTENT -->
+    <main class="relative isolate px-6 pt-24 lg:pt-0">
       <div class="mx-auto max-w-7xl">
-        <!-- Welcome Section -->
-        <div class="text-center mb-12">
-          <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-            Welcome back, John!
+        <!-- Welcome -->
+        <div class="text-center py-32 sm:py-48 lg:py-56">
+          <h1
+            class="text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight"
+          >
+            Welcome back, John
           </h1>
-          <p class="mt-4 text-lg text-gray-300">
-            Here's your learning overview.
+          <p
+            class="mt-8 text-lg font-medium leading-relaxed text-gray-300 sm:text-xl max-w-3xl mx-auto"
+          >
+            You're currently ranked
+            <span class="text-indigo-400 font-semibold">#42 globally</span> —
+            keep pushing your limits!
           </p>
         </div>
 
         <!-- Stats Cards -->
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-12">
+        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 mb-20">
           <div
-            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-6 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
           >
             <h3 class="text-xl font-semibold text-indigo-400">Total Points</h3>
-            <p class="mt-2 text-3xl font-bold text-white">1,234</p>
+            <p class="mt-4 text-5xl font-bold text-white">1,234</p>
+            <p class="mt-2 text-base text-gray-400">+182 this week</p>
           </div>
           <div
-            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-6 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
           >
-            <h3 class="text-xl font-semibold text-indigo-400">Current Level</h3>
-            <p class="mt-2 text-3xl font-bold text-white">5</p>
+            <h3 class="text-xl font-semibold text-indigo-400">Global Rank</h3>
+            <p class="mt-4 text-5xl font-bold text-white">#42</p>
+            <p class="mt-2 text-base text-green-400">Up 8 this week</p>
           </div>
           <div
-            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-6 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
           >
-            <h3 class="text-xl font-semibold text-indigo-400">Rank</h3>
-            <p class="mt-2 text-3xl font-bold text-white">#42</p>
+            <h3 class="text-xl font-semibold text-indigo-400">
+              Current Streak
+            </h3>
+            <p class="mt-4 text-5xl font-bold text-white">7 days</p>
+            <p class="mt-2 text-base text-gray-400">Personal best: 14</p>
           </div>
           <div
-            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-6 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
           >
-            <h3 class="text-xl font-semibold text-indigo-400">Streak</h3>
-            <p class="mt-2 text-3xl font-bold text-white">7 days</p>
+            <h3 class="text-xl font-semibold text-indigo-400">Level</h3>
+            <p class="mt-4 text-5xl font-bold text-white">5</p>
+            <div class="mt-6 w-full bg-gray-700 rounded-full h-4">
+              <div
+                class="bg-gradient-to-r from-indigo-500 to-purple-500 h-4 rounded-full"
+                style="width: 68%"
+              ></div>
+            </div>
           </div>
         </div>
 
-        <!-- Progress Chart -->
-        <div
-          class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300 mb-12"
-        >
-          <h2 class="text-2xl font-bold text-white mb-4">Progress Over Time</h2>
-          <canvas id="progressChart" height="200"></canvas>
-        </div>
+        <!-- Daily Challenges -->
+        <section class="mb-20">
+          <div
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+          >
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-10">
+              Today's Challenges
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+              <div
+                class="p-8 bg-gray-800/50 rounded-2xl border border-indigo-500/30 hover:border-indigo-400 transition-all"
+              >
+                <h3 class="text-2xl font-semibold text-indigo-300 mb-3">
+                  Algebra Master
+                </h3>
+                <p class="text-base text-gray-300 mb-6">
+                  Solve 15 advanced algebra questions
+                </p>
+                <div class="flex justify-between items-center">
+                  <span class="text-base text-gray-400">11 / 15</span>
+                  <button
+                    class="px-8 py-3 bg-indigo-600 rounded-xl hover:bg-indigo-500 transition font-medium text-base"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </div>
+              <div
+                class="p-8 bg-gray-800/50 rounded-2xl border border-green-500/30"
+              >
+                <h3 class="text-2xl font-semibold text-green-300 mb-3">
+                  Physics Sprint
+                </h3>
+                <p class="text-base text-gray-300 mb-6">
+                  Complete 8 mechanics problems
+                </p>
+                <div class="flex items-center gap-3">
+                  <svg
+                    class="w-10 h-10 text-green-400"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-green-400 font-medium text-lg"
+                    >+75 pts earned</span
+                  >
+                </div>
+              </div>
+              <div
+                class="p-8 bg-gray-800/50 rounded-2xl border border-gray-600 opacity-60"
+              >
+                <h3 class="text-2xl font-semibold text-gray-400 mb-3">
+                  History Deep Dive
+                </h3>
+                <p class="text-base text-gray-500">Available tomorrow</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-        <!-- Subject Performance Chart -->
-        <div
-          class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300 mb-12"
-        >
-          <h2 class="text-2xl font-bold text-white mb-4">
-            Subject Performance
-          </h2>
-          <canvas id="subjectChart" height="200"></canvas>
-        </div>
+        <!-- Leaderboard - Full Top 10 -->
+        <section class="mb-20">
+          <div
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+          >
+            <div class="flex items-center justify-between mb-10">
+              <h2 class="text-3xl md:text-4xl font-bold text-white">
+                Leaderboard
+              </h2>
+              <div class="flex bg-gray-800 rounded-xl p-1">
+                <button
+                  id="global-btn"
+                  onclick="switchLeaderboard('global')"
+                  class="px-8 py-3 rounded-lg font-semibold bg-indigo-600 text-white"
+                >
+                  Global Top 10
+                </button>
+                <button
+                  id="school-btn"
+                  onclick="switchLeaderboard('school')"
+                  class="px-8 py-3 rounded-lg font-semibold text-gray-300 hover:bg-gray-700 transition"
+                >
+                  School Top 10
+                </button>
+              </div>
+            </div>
 
-        <!-- Recent Tests Table -->
-        <div
-          class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300 mb-12"
-        >
-          <h2 class="text-2xl font-bold text-white mb-4">Recent Tests</h2>
-          <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-white/10">
-              <thead>
-                <tr>
-                  <th
-                    class="px-6 py-3 text-left text-sm font-medium text-indigo-400"
-                  >
-                    Test Name
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-sm font-medium text-indigo-400"
-                  >
-                    Score
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-sm font-medium text-indigo-400"
-                  >
-                    Date
-                  </th>
-                  <th
-                    class="px-6 py-3 text-left text-sm font-medium text-indigo-400"
-                  >
-                    Actions
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-white/10">
-                <tr>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    Math Chapter 1
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    85%
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    2023-10-01
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    <a href="#" class="text-indigo-400 hover:text-indigo-300"
-                      >Review</a
+            <!-- Global Top 10 -->
+            <div id="global-leaderboard" class="space-y-5">
+              <div
+                class="flex items-center justify-between p-6 bg-gradient-to-r from-yellow-600/20 to-transparent rounded-2xl border border-yellow-500/30"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-3xl font-bold text-yellow-400">#1</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Alice"
+                    class="w-14 h-14 rounded-full ring-4 ring-yellow-500/50"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Alice Chen</p>
+                    <p class="text-gray-400">Harvard International</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">5,820 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#2</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Bob"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Bob Kim</p>
+                    <p class="text-gray-400">Seoul Science High</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">5,610 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#3</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Sarah"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Sarah Park</p>
+                    <p class="text-gray-400">Raffles Institution</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">5,480 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#4</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=David"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">David Liu</p>
+                    <p class="text-gray-400">Phillips Exeter</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">5,320 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#5</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Emma"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Emma Wilson</p>
+                    <p class="text-gray-400">Eton College</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">5,180 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#6</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Li"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Li Wei</p>
+                    <p class="text-gray-400">Beijing No.4</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">5,050 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#7</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=James"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">James Carter</p>
+                    <p class="text-gray-400">Westminster</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">4,980 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#8</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Sofia"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Sofia Martinez</p>
+                    <p class="text-gray-400">Colegio Madrid</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">4,890 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#9</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Ryan"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Ryan Tan</p>
+                    <p class="text-gray-400">Hwa Chong</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">4,810 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#10</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Olivia"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Olivia Brown</p>
+                    <p class="text-gray-400">Sydney Grammar</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">4,720 pts</p>
+              </div>
+            </div>
+
+            <!-- School Top 10 -->
+            <div id="school-leaderboard" class="hidden space-y-5">
+              <div
+                class="flex items-center justify-between p-6 bg-gradient-to-r from-indigo-600/20 to-purple-600/20 rounded-2xl border border-indigo-500/40"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-3xl font-bold text-indigo-300">#1</span>
+                  <div class="relative">
+                    <img
+                      src="https://ui-avatars.com/api/?name=You&background=6366f1&color=fff&bold=true"
+                      class="w-14 h-14 rounded-full ring-4 ring-indigo-500"
+                    />
+                    <div
+                      class="absolute -bottom-1 -right-1 bg-indigo-600 text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center"
                     >
-                  </td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    Science Quiz
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    92%
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-                    2023-09-28
-                  </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-sm">
-                    <a href="#" class="text-indigo-400 hover:text-indigo-300"
-                      >Review</a
-                    >
-                  </td>
-                </tr>
-                <!-- Add more rows as needed -->
-              </tbody>
-            </table>
+                      You
+                    </div>
+                  </div>
+                  <div>
+                    <p class="text-xl font-bold">John Doe</p>
+                    <p class="text-indigo-300">Example High School</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">1,234 pts</p>
+              </div>
+              <div
+                class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
+              >
+                <div class="flex items-center gap-6">
+                  <span class="text-2xl font-bold text-gray-400">#2</span
+                  ><img
+                    src="https://ui-avatars.com/api/?name=Alex"
+                    class="w-14 h-14 rounded-full"
+                  />
+                  <div>
+                    <p class="text-xl font-bold">Alex Rivera</p>
+                    <p class="text-gray-400">Example High School</p>
+                  </div>
+                </div>
+                <p class="text-2xl font-bold">1,180 pts</p>
+              </div>
+              <!-- More school entries... -->
+            </div>
           </div>
-        </div>
+        </section>
+
+        <!-- Recent Tests -->
+        <section class="mb-20">
+          <div
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+          >
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-10">
+              Recent Tests
+            </h2>
+            <div class="space-y-8">
+              <div
+                class="flex items-center justify-between p-8 bg-gray-800/50 rounded-2xl hover:bg-gray-800/70 transition"
+              >
+                <div class="flex items-center gap-6">
+                  <div
+                    class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center text-3xl font-bold"
+                  >
+                    M
+                  </div>
+                  <div>
+                    <p class="text-2xl font-semibold">Advanced Algebra Final</p>
+                    <p class="text-base text-gray-400">
+                      Oct 1, 2025 • 45 questions
+                    </p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-4xl font-bold text-green-400">94%</p>
+                  <a
+                    href="#"
+                    class="text-indigo-400 hover:text-indigo-300 text-base font-medium"
+                    >Review Answers →</a
+                  >
+                </div>
+              </div>
+              <div
+                class="flex items-center justify-between p-8 bg-gray-800/50 rounded-2xl hover:bg-gray-800/70 transition"
+              >
+                <div class="flex items-center gap-6">
+                  <div
+                    class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-3xl font-bold"
+                  >
+                    P
+                  </div>
+                  <div>
+                    <p class="text-2xl font-semibold">Physics Mechanics</p>
+                    <p class="text-base text-gray-400">
+                      Sep 28, 2025 • 30 questions
+                    </p>
+                  </div>
+                </div>
+                <div class="text-right">
+                  <p class="text-4xl font-bold text-green-400">89%</p>
+                  <a
+                    href="#"
+                    class="text-indigo-400 hover:text-indigo-300 text-base font-medium"
+                    >Review Answers →</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <!-- Achievements -->
-        <div
-          class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
-        >
-          <h2 class="text-2xl font-bold text-white mb-4">Achievements</h2>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div class="text-center">
-              <div
-                class="mx-auto w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center"
-              >
-                <svg
-                  class="w-8 h-8 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+        <section class="mb-20">
+          <div
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+          >
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-10">
+              Achievements
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div class="text-center group">
+                <div
+                  class="mx-auto w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition"
                 >
-                  <path
-                    d="M5 13l4 4L19 7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                  />
-                </svg>
+                  <svg
+                    class="w-12 h-12 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <p class="mt-4 text-lg font-semibold text-indigo-300">
+                  Perfectionist
+                </p>
+                <p class="text-base text-gray-400">Score 100% on 5 tests</p>
               </div>
-              <p class="mt-2 text-sm text-gray-300">First Test</p>
-            </div>
-            <div class="text-center">
-              <div
-                class="mx-auto w-16 h-16 bg-indigo-500 rounded-full flex items-center justify-center"
-              >
-                <svg
-                  class="w-8 h-8 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              <div class="text-center group">
+                <div
+                  class="mx-auto w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-3xl flex items-center justify-center shadow-2xl group-hover:scale-110 transition"
                 >
-                  <path
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                  />
-                </svg>
+                  <svg
+                    class="w-12 h-12 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-.293.707l-5 5a1 1 0 00-.293.707V17l-4-4v-1.586a1 1 0 00-.293-.707l-5-5A1 1 0 013 6V4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <p class="mt-4 text-lg font-semibold text-green-300">
+                  Speed Demon
+                </p>
+                <p class="text-base text-gray-400">
+                  Finish 10 tests under time
+                </p>
               </div>
-              <p class="mt-2 text-sm text-gray-300">Streak Master</p>
+              <!-- More -->
             </div>
-            <!-- Add more achievements -->
+          </div>
+        </section>
+
+        <!-- Charts -->
+        <div class="grid lg:grid-cols-2 gap-10 mb-20">
+          <div
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+          >
+            <h3 class="text-3xl font-bold text-white mb-8">Weekly Progress</h3>
+            <canvas id="progressChart"></canvas>
+          </div>
+          <div
+            class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 md:p-16 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
+          >
+            <h3 class="text-3xl font-bold text-white mb-8">Subject Mastery</h3>
+            <canvas id="subjectChart"></canvas>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- FOOTER LIKE ORIGINAL -->
+    <!-- ORIGINAL FOOTER -->
     <footer class="bg-gray-900 border-t border-gray-700 mt-20">
       <div class="max-w-7xl mx-auto px-6 py-12">
-        <!-- Top section: Services & Legal -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 mb-10">
-          <!-- Services -->
           <div>
             <h6 class="text-white text-lg font-semibold mb-4">Services</h6>
             <ul class="space-y-2 text-gray-400">
@@ -381,7 +740,6 @@
               <li>Points & Achievements</li>
             </ul>
           </div>
-          <!-- Legal -->
           <div>
             <h6 class="text-white text-lg font-semibold mb-4">Legal</h6>
             <ul class="space-y-2 text-gray-400">
@@ -390,10 +748,8 @@
               <li>Cookie Policy</li>
             </ul>
           </div>
-          <!-- Placeholder for spacing / extra info if needed -->
           <div></div>
         </div>
-        <!-- Bottom section: copyright and social -->
         <div
           class="flex flex-col md:flex-row justify-between items-center border-t border-gray-700 pt-6"
         >
@@ -405,103 +761,80 @@
               href="#"
               class="text-gray-400 hover:text-white transition-colors duration-300"
             >
-              <!-- Facebook Icon -->
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path
                   d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 5 3.657 9.128 8.438 9.878v-6.988h-2.54v-2.89h2.54V9.845c0-2.507 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.772-1.63 1.562v1.875h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 17 22 12z"
                 />
               </svg>
             </a>
-            <!-- X (formerly Twitter) Icon -->
-            <a
-              href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 512 512">
-                <path
-                  d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.8-298.8 298.8-59.4 0-114.7-17.2-161.1-46.8 8.4 1 16.8 1.3 25.3 1.3 49.1 0 94.3-16.8 130.2-45-46-1-84.8-31.2-98.1-72.9 6.4 1 12.8 1.6 19.4 1.6 9.4 0 18.5-1.3 27.1-3.6-48.2-9.7-84.4-52.2-84.4-103.3v-1.3c14.1 7.8 30.2 12.5 47.4 13-28.2-18.8-46.8-50.7-46.8-87 0-19.1 5.1-36.9 14-52.2 51.5 63.3 128.5 104.8 215.2 109.3-1.8-7.7-2.8-15.7-2.8-23.9 0-57.5 46.8-104.3 104.3-104.3 30 0 57.1 12.5 76.2 32.7 23.7-4.5 46-13.3 66-25.3-7.8 24.5-24.5 45-46.2 57.9 21.2-2.4 41.5-8.2 60.3-16.6-14 21-31.8 39.5-52.2 54.3z"
-                />
-              </svg>
-            </a>
-            <!-- GitHub Icon -->
-            <a
-              href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M12 0C5.373 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.613-4.042-1.613-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.082-.729.082-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.762-1.604-2.665-.303-5.466-1.332-5.466-5.932 0-1.31.467-2.382 1.235-3.222-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23a11.52 11.52 0 013.003-.403c1.018.005 2.045.138 3.003.403 2.29-1.552 3.296-1.23 3.296-1.23.655 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.804 5.625-5.475 5.922.43.372.815 1.102.815 2.222 0 1.606-.015 2.898-.015 3.293 0 .32.216.694.825.576C20.565 21.795 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-                />
-              </svg>
-            </a>
-            <!-- Discord Icon -->
-            <a
-              href="#"
-              class="text-gray-400 hover:text-white transition-colors duration-300"
-            >
-              <svg class="w-6 h-6" viewBox="0 0 245 240" fill="currentColor">
-                <path
-                  d="M104.4 104.6c-5.7 0-10.1 5-10.1 11.2 0 6.2 4.6 11.2 10.1 11.2 5.7 0 10.2-5 10.1-11.2 0-6.2-4.5-11.2-10.1-11.2zm36.3 0c-5.7 0-10.1 5-10.1 11.2 0 6.2 4.6 11.2 10.1 11.2 5.7 0 10.2-5 10.1-11.2 0-6.2-4.5-11.2-10.1-11.2z"
-                />
-                <path
-                  d="M189.5 20H55.5C24.9 20 0 44.9 0 75.5v89C0 195.1 24.9 220 55.5 220h124c30.6 0 55.5-24.9 55.5-55.5v-89C245 44.9 220.1 20 189.5 20zM164.1 159.5s-5.5-6.5-10-12c19-5.3 26-16.8 26-16.8-6 4-11.7 6.8-16.8 8.8-7.3 3.2-14.3 5.3-21.3 6.5-14.1 2.7-26.8 2-38.1-0.1-8-1.6-14.8-3.9-20.6-6.5-3-1.3-6.2-2.7-9.3-4.2-0.4-0.2-0.8-0.3-1.2-0.5-0.3-0.1-0.5-0.2-0.7-0.3-0.1 0-0.1-0.1-0.1-0.1-0.2-0.1-0.3-0.1-0.3-0.1l-0.1-0.1s7 11.3 25.5 16.8c-4.5 5.5-10 12-10 12-32.9-1-45.3-22.7-45.3-22.7 0-48 21.5-87 21.5-87C59.3 48 82.1 48 82.1 48l2.7 3.1c-30.8 8.8-44.9 22.1-44.9 22.1s3.7-2 10.1-4.7c18.3-7.2 32.8-9.1 38.8-9.6 0.9-0.1 1.7-0.1 2.6-0.1 9.4-1.3 20-1.6 31.2-0.1 16.8 2.1 34.6 7.6 53.5 17.2 0 0-13.7-13.3-44.3-22l2.6-2.9s22.8 0 46.7 22.7c0 0 21.5 39 21.5 87 0 0-12.4 21.7-45.3 22.7z"
-                />
-              </svg>
-            </a>
+            <!-- Other social icons -->
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Chart Script -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const progressCtx = document
-          .getElementById("progressChart")
-          .getContext("2d");
-        new Chart(progressCtx, {
+      function switchLeaderboard(type) {
+        document
+          .getElementById("global-leaderboard")
+          .classList.toggle("hidden", type !== "global");
+        document
+          .getElementById("school-leaderboard")
+          .classList.toggle("hidden", type !== "school");
+        document
+          .getElementById("global-btn")
+          .classList.toggle("bg-indigo-600", type === "global");
+        document
+          .getElementById("global-btn")
+          .classList.toggle("text-white", type === "global");
+        document
+          .getElementById("school-btn")
+          .classList.toggle("bg-indigo-600", type === "school");
+        document
+          .getElementById("school-btn")
+          .classList.toggle("text-white", type === "school");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        new Chart(document.getElementById("progressChart"), {
           type: "line",
           data: {
-            labels: ["Week 1", "Week 2", "Week 3", "Week 4", "Week 5"],
+            labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
             datasets: [
               {
-                label: "Score Progress",
-                data: [65, 59, 80, 81, 92],
+                label: "Points",
+                data: [120, 180, 160, 280, 310, 290, 350],
                 borderColor: "#6366f1",
-                backgroundColor: "#6366f150",
+                backgroundColor: "rgba(99,102,241,0.1)",
                 fill: true,
                 tension: 0.4,
+                pointBackgroundColor: "#6366f1",
+                pointRadius: 6,
               },
             ],
           },
           options: {
             responsive: true,
-            scales: {
-              y: {
-                beginAtZero: true,
-                grid: { color: "#374151" },
-                ticks: { color: "#d1d5db" },
-              },
-              x: { grid: { color: "#374151" }, ticks: { color: "#d1d5db" } },
-            },
-            plugins: { legend: { labels: { color: "#d1d5db" } } },
+            plugins: { legend: { display: false } },
           },
         });
 
-        const subjectCtx = document
-          .getElementById("subjectChart")
-          .getContext("2d");
-        new Chart(subjectCtx, {
+        new Chart(document.getElementById("subjectChart"), {
           type: "radar",
           data: {
-            labels: ["Math", "Science", "History", "English", "Art"],
+            labels: [
+              "Math",
+              "Physics",
+              "Chemistry",
+              "Biology",
+              "English",
+              "History",
+            ],
             datasets: [
               {
-                label: "Performance",
-                data: [85, 92, 78, 88, 95],
-                backgroundColor: "#6366f150",
+                label: "Mastery",
+                data: [88, 82, 90, 76, 85, 79],
+                backgroundColor: "rgba(99,102,241,0.2)",
                 borderColor: "#6366f1",
                 pointBackgroundColor: "#6366f1",
               },
@@ -509,10 +842,7 @@
           },
           options: {
             responsive: true,
-            scales: {
-              r: { grid: { color: "#374151" }, ticks: { color: "#d1d5db" } },
-            },
-            plugins: { legend: { labels: { color: "#d1d5db" } } },
+            plugins: { legend: { display: false } },
           },
         });
       });
