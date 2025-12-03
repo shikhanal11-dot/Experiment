@@ -103,6 +103,7 @@
             <a
               href="#"
               class="text-lg font-semibold text-white hover:text-indigo-300 transition-all duration-300"
+              id="login_link"
             >
               Log in →
             </a>
@@ -723,6 +724,9 @@
     </footer>
     <script>
       document.getElementById("get_started").addEventListener("click", function () {
+        window.location.href = "signinup.html";
+      });
+      document.getElementById("login_link").addEventListener("click", function () {
         window.location.href = "signinup.html";
       });
     </script>

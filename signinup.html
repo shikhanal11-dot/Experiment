@@ -264,7 +264,7 @@
       <!-- name --> 
       <div class="signup-fields form-group">
         <label>Enter Your Name</label>
-        <input type="text" id="firstName">
+        <input type="text" id="name">
       </div>
 
     
@@ -311,6 +311,7 @@
   <!-- SUPABASE SCRIPT -->
   <script type="module">
     import { supabase } from "./supabase-init.js";
+    console.log("Supabase initialized:", supabase);
 
     const signupFields = document.querySelectorAll(".signup-fields");
     const toggleLink = document.getElementById("toggleLink");
@@ -352,8 +353,8 @@
     authForm.addEventListener("submit", async e => {
       e.preventDefault();
 
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
+      let email = document.getElementById("email").value.trim();
+      let password = document.getElementById("password").value.trim();
 
       if (!isSignup) {
         // LOGIN
@@ -363,38 +364,38 @@
       }
 
       // SIGNUP
-      const first = document.getElementById("firstName").value.trim();
-      const last = document.getElementById("lastName").value.trim();
-      const grade = document.getElementById("grade").value.trim();
-      const school = document.getElementById("school").value.trim();
+      let name = document.getElementById("name").value.trim();
+      let grade = document.getElementById("grade").value.trim();
+      let school = document.getElementById("school").value.trim();
 
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
-        options: { emailRedirectTo: window.location.origin }
+        options: { 
+          emailRedirectTo: window.location.origin
+        }
       });
 
       if (authError) return alert(authError.message);
 
-      const { data: sessionData } = await supabase.auth.getSession();
-      const user = sessionData.session?.user;
+      let { data: sessionData } = await supabase.auth.getSession();
+      let user = sessionData.session?.user;
 
       if (!user) return alert("Check your email to verify before continuing.");
 
-      const { error: profileError } = await supabase.from("profiles").insert({
+      let { error: profileError } = await supabase.from("profiles").insert({
         id: user.id,
-        email,
-        first_name: first,
-        last_name: last,
-        grade,
-        school,
-        points: 0
+        email:email,
+        username: name,
+        grade: grade,
+        school: school,
+        points: 0,
       });
 
       if (profileError) return alert(profileError.message);
 
-      alert("Account created!");
-      window.location.href = "dashboard.html";
+      alert("Account created! Also Make sure to verify your email.");
+      window.location.href = "index.html";
     });
   </script>
 </body>
