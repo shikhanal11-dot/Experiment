@@ -378,13 +378,15 @@
 
       if (authError) return alert(authError.message);
 
-      let { data: sessionData } = await supabase.auth.getSession();
-      let user = sessionData.session?.user;
+      let user = authData.user;
+      if (!user) {
+        alert("Unexpected signup error: user is null.");
+        return;
+      }
 
-      if (!user) return alert("Check your email to verify before continuing.");
 
       let { error: profileError } = await supabase.from("profiles").insert({
-        id: user.id,
+        user_id: user.id,
         email:email,
         username: name,
         grade: grade,

@@ -147,14 +147,18 @@
           <button
             class="flex items-center gap-3 p-3 rounded-xl hover:bg-white/5 transition group"
           >
-            <img
+            <!-- <img
               src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff&bold=true"
               alt="Profile"
               class="w-10 h-10 rounded-full ring-2 ring-indigo-500/50 group-hover:ring-indigo-400 transition"
-            />
+            /> -->
+            <div class="avatar-container w-10 h-10 rounded-full ring-2 ring-indigo-500/50 group-hover:ring-indigo-400 transition">
+              <canvas class="user-avatar w-10 h-10 rounded-full"></canvas>
+            </div>
+
             <div class="text-left opacity-0 group-hover:opacity-100 transition">
-              <p class="text-sm font-semibold">John Doe</p>
-              <p class="text-xs text-indigo-300">Level 5 • 1,234 pts</p>
+              <p id="name_top" class="text-sm font-semibold">Loading...</p>
+              <p id="points_top" class="text-xs text-indigo-300">Level 5 • Loading...</p>
             </div>
           </button>
         </div>
@@ -234,9 +238,10 @@
         <!-- Welcome - Exact size & spacing -->
         <div class="text-center py-32 sm:py-48 lg:py-56">
           <h1
+            id="name_dashboard"
             class="text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight"
           >
-            Welcome back, John
+            Loading...
           </h1>
           <p
             class="mt-8 text-lg font-medium leading-relaxed text-gray-300 sm:text-xl max-w-3xl mx-auto"
@@ -253,7 +258,7 @@
             class="bg-gradient-to-br from-gray-800/95 to-gray-900/95 backdrop-blur-xl rounded-3xl p-12 shadow-2xl border border-gray-700/50 hover:border-indigo-500/30 transition-all duration-300"
           >
             <h3 class="text-base font-medium text-indigo-400">Total Points</h3>
-            <p class="mt-4 text-3xl font-bold text-white sm:text-5xl">1,234</p>
+            <p id="points_dashboard" class="mt-4 text-3xl font-bold text-white sm:text-5xl">Loading...</p>
             <p class="mt-2 text-base text-gray-400">+182 this week</p>
           </div>
           <div
@@ -550,10 +555,14 @@
                 <div class="flex items-center gap-6">
                   <span class="text-3xl font-bold text-indigo-300">#1</span>
                   <div class="relative">
-                    <img
+                    <!-- <img
                       src="https://ui-avatars.com/api/?name=You&background=6366f1&color=fff&bold=true"
                       class="w-14 h-14 rounded-full ring-4 ring-indigo-500"
-                    />
+                    /> -->
+                    <div class="avatar-container w-10 h-10 rounded-full ring-2 ring-indigo-500/50 group-hover:ring-indigo-400 transition">
+                      <canvas class="user-avatar w-10 h-10 rounded-full"></canvas>
+                    </div>
+
                     <div
                       class="absolute -bottom-1 -right-1 bg-indigo-600 text-xs font-bold rounded-full w-7 h-7 flex items-center justify-center"
                     >
@@ -561,11 +570,11 @@
                     </div>
                   </div>
                   <div>
-                    <p class="text-xl font-bold">John Doe</p>
-                    <p class="text-indigo-300">Example High School</p>
+                    <p id="name_leaderboard" class="text-xl font-bold">Loading...</p>
+                    <p id="school_leaderboard" class="text-indigo-300">Loading...</p>
                   </div>
                 </div>
-                <p class="text-2xl font-bold">1,234 pts</p>
+                <p id="points_leaderboard" class="text-2xl font-bold">Loading...</p>
               </div>
               <div
                 class="flex items-center justify-between p-6 bg-gray-800/50 rounded-2xl"
@@ -578,7 +587,7 @@
                   />
                   <div>
                     <p class="text-xl font-bold">Alex Rivera</p>
-                    <p class="text-gray-400">Example High School</p>
+                    <p id="school_leaderboard" class="text-gray-400">Loading...</p>
                   </div>
                 </div>
                 <p class="text-2xl font-bold">1,180 pts</p>
@@ -826,7 +835,81 @@
         </div>
       </div>
     </footer>
+    <script type="module">
+      import { supabase } from "./supabase-init.js";
+      console.log("Supabase initialized:", supabase);
 
+      const user = (await supabase.auth.getUser()).data.user;
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("user_id", user.id);
+
+      if (error) console.error(error);
+
+      console.log(data);            // array
+      console.log(data[0].points);  // correct
+      console.log("User ID:", user.id);
+
+      const userName = data[0].username;
+      function getFirstName(userName) {
+        const nameParts = userName.split(" ");  // Split the name by spaces
+        return nameParts[0];  // Return the first part (the first name)
+      }
+
+      const firstName = getFirstName(userName);
+
+      document.getElementById("school_leaderboard").textContent = data[0].school;
+      document.getElementById("name_top").textContent = data[0].username;
+      document.getElementById("name_dashboard").textContent = `Welcome back, ${firstName}`;
+      document.getElementById("name_leaderboard").textContent = data[0].username;
+      document.getElementById("points_top").textContent = `Level 5 • ${data[0].points}`;
+      document.getElementById("points_dashboard").textContent = data[0].points;
+      document.getElementById("points_leaderboard").textContent = data[0].points;
+      
+      // Generate avatarinitials available
+      console.log("Generating avatar for:", userName);
+      function getInitials(name) {
+        const nameParts = name.split(" ");
+        const initials = nameParts.map(part => part.charAt(0).toUpperCase()).join("");
+        return initials;
+      }
+
+      // Find all elements with the class 'user-avatar' (all canvas elements)
+      const avatars = document.querySelectorAll('.user-avatar');
+
+      avatars.forEach(avatar => {
+        // Canvas setup
+        const ctx = avatar.getContext("2d");
+        const canvasSize = 40; // Adjust size as needed
+
+        // Background color and text color
+        const backgroundColor = "#6366f1"; // Same as your example
+        const textColor = "#fff";
+
+        // Set canvas size
+        avatar.width = canvasSize;
+        avatar.height = canvasSize;
+
+        // Draw the background circle
+        ctx.beginPath();
+        ctx.arc(canvasSize / 2, canvasSize / 2, canvasSize / 2, 0, 2 * Math.PI);
+        ctx.fillStyle = backgroundColor;
+        ctx.fill();
+
+        // Draw the initials in the center
+        ctx.fillStyle = textColor;
+        ctx.font = "bold 16px Arial"; // Adjust font size as needed
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(getInitials(userName), canvasSize / 2, canvasSize / 2);
+      });
+
+
+      
+
+    </script>
     <script>
       function switchLeaderboard(type) {
         document
