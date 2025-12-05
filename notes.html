@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Study Quest — Notes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Bubble background animation */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg,#FFE3A9,#8CCDEB);
+      overflow-x: hidden;
+    }
+    
+  /* Bubble background animation (existing) */
+  .bubble { position: absolute; border-radius: 50%; opacity: 0.3; animation: float 20s infinite; }
+  @keyframes float { 0%{transform:translateY(100vh) scale(0.5);} 50%{transform:translateY(50vh) scale(1);} 100%{transform:translateY(-10vh) scale(0.5);} }
+
+  <style>
+  /* Body & base */
+  body {
+    @apply font-inter bg-gradient-to-br from-[#FFE3A9] via-[#8CCDEB] to-[#725CAD] text-[#0B1D51] min-h-screen;
+    line-height: 1.5;
+  }
+
+  /* Container & layout */
+  .container {
+    @apply max-w-6xl mx-auto px-4 py-6;
+  }
+  .topbar {
+    @apply flex justify-between items-center bg-white/70 p-4 rounded-xl shadow-lg mb-6;
+  }
+
+  /* Navigation links */
+  nav.main a {
+    @apply px-3 py-1 rounded-lg font-semibold text-[#0B1D51] transition-all;
+  }
+  nav.main a.active {
+    @apply bg-[#725CAD] text-white;
+  }
+  nav.main a:hover {
+    @apply bg-[#8CCDEB]/30;
+  }
+
+  /* Layout */
+  .layout {
+    @apply grid md:grid-cols-[260px_1fr] gap-6;
+  }
+
+  /* Left rail */
+  aside.left {
+    @apply bg-white/80 rounded-xl p-5 shadow-lg;
+  }
+  .folders h4 {
+    @apply font-bold mb-3 text-sm;
+  }
+  .folder-list {
+    @apply flex flex-col gap-2;
+  }
+  .folder {
+    @apply flex justify-between items-center p-3 rounded-xl cursor-pointer transition-all duration-200;
+  }
+  .folder:hover {
+    @apply bg-[#8CCDEB]/20 shadow-lg transform -translate-y-1 scale-105;
+  }
+  .folder.active {
+    @apply bg-gradient-to-r from-[#725CAD]/20 to-[#8CCDEB]/20 border border-[#725CAD]/40 shadow-inner;
+  }
+
+  /* Create folder */
+  #newFolderInput {
+    @apply w-full p-3 rounded-xl border border-gray-300 focus:border-[#725CAD] focus:ring-1 focus:ring-[#725CAD];
+  }
+  #createFolderBtn {
+    @apply w-full mt-2 bg-gradient-to-b from-[#725CAD] to-[#5C3FAC] text-white font-bold py-2 px-4 rounded-xl shadow-md relative overflow-hidden;
+  }
+  #createFolderBtn::after {
+    content:"";
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-xl transform -translate-x-full transition-transform duration-700;
+  }
+  #createFolderBtn:hover::after {
+    @apply translate-x-full;
+  }
+
+  /* Main panel */
+  main {
+    @apply flex flex-col gap-6;
+  }
+  .panel {
+    @apply bg-white/80 p-6 rounded-xl shadow-lg;
+  }
+
+  /* Upload dropzone */
+  .drop {
+    @apply flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer relative transition-all duration-300;
+  }
+  .drop:hover {
+    @apply bg-[#8CCDEB]/20 border-[#725CAD]/50 shadow-lg;
+  }
+  .drop.drag {
+    @apply bg-gradient-to-br from-[#FFE3A9]/30 to-[#8CCDEB]/30 border-[#725CAD]/70 shadow-2xl;
+  }
+
+  /* Meta inputs */
+  .meta input[type=text], .folder-input {
+    @apply w-full p-3 rounded-xl border border-gray-300 focus:border-[#725CAD] focus:ring-1 focus:ring-[#725CAD];
+  }
+
+  /* Buttons */
+  .btn {
+    @apply py-2 px-4 rounded-xl font-bold relative overflow-hidden transition-all;
+  }
+  .btn.primary {
+    @apply bg-gradient-to-b from-[#725CAD] to-[#5C3FAC] text-white shadow-lg;
+  }
+  .btn.primary::after {
+    content:"";
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-xl transform -translate-x-full transition-transform duration-700;
+  }
+  .btn.primary:hover::after {
+    @apply translate-x-full;
+  }
+  .btn.ghost {
+    @apply bg-transparent border border-[#725CAD]/30 text-[#725CAD];
+  }
+
+  /* Files grid */
+  .files-grid {
+    @apply grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  }
+  .file {
+    @apply bg-white rounded-xl p-4 shadow-md flex flex-col justify-between relative overflow-hidden transition-all duration-300;
+  }
+  .file::before {
+    content:"";
+    @apply absolute top-0 left-0 w-full h-1 rounded-t-xl;
+    background: linear-gradient(90deg,#725CAD,#8CCDEB);
+  }
+  .file:hover {
+    @apply shadow-2xl transform scale-105;
+  }
+
+  /* Focus accessibility */
+  :focus {
+    @apply outline-3 outline-[#725CAD]/30 outline-offset-2;
+  }
+
+
+
+  </style>
+</head>
+<body class="relative min-h-screen">
+ 
+
+
+  <!-- Background Bubbles -->
+  <div class="bubble w-24 h-24 bg-purple-300 left-10 top-10 animate-[float_25s_linear_infinite]"></div>
+  <div class="bubble w-32 h-32 bg-blue-300 left-1/2 top-20 animate-[float_30s_linear_infinite]"></div>
+  <div class="bubble w-16 h-16 bg-yellow-300 left-3/4 top-1/3 animate-[float_22s_linear_infinite]"></div>
+
+  <!-- Container -->
+  <div class="max-w-6xl mx-auto p-4 relative z-10">
+
+    <!-- Header -->
+    <header class="flex justify-between items-center bg-white/80 rounded-xl shadow-lg p-4 mb-6">
+      <div class="flex items-center gap-3">
+        <img src="../images/logo.png" alt="Study Quest" class="w-12 h-12 rounded-lg">
+        <div>
+          <h1 class="font-extrabold text-lg text-[#0B1D51]">Study Quest</h1>
+          <p class="text-sm text-[#44506B]">Learn. Review. Level up.</p>
+        </div>
+      </div>
+      <nav class="flex gap-3">
+        <a href="../dashboard/dashboard.html" class="px-3 py-1 font-semibold rounded-lg hover:bg-[#725CAD]/20 transition">Home</a>
+        <a href="../inbuilt/inbuilt.html" class="px-3 py-1 font-semibold rounded-lg hover:bg-[#725CAD]/20 transition">Inbuilt</a>
+        <a href="../selftest/selftest.html" class="px-3 py-1 font-semibold rounded-lg hover:bg-[#725CAD]/20 transition">Self Test</a>
+        <a href="../notes/notes.html" class="px-3 py-1 font-semibold rounded-lg bg-[#725CAD] text-white">Notes</a>
+        <a href="../review/review.html" class="px-3 py-1 font-semibold rounded-lg hover:bg-[#725CAD]/20 transition">Review</a>
+      </nav>
+      <a href="../profile/profile.html" class="px-4 py-2 font-bold rounded-xl bg-gradient-to-br from-[#725CAD] to-[#5C3FAC] text-white shadow-lg hover:scale-105 transition">Profile</a>
+    </header>
+
+    <!-- Layout -->
+    <div class="grid md:grid-cols-4 gap-6">
+
+      <!-- Left Rail -->
+      <aside class="md:col-span-1 bg-white/90 rounded-xl shadow-lg p-4 space-y-4">
+        <h3 class="font-semibold text-[#0B1D51]">Folders</h3>
+        <div id="folderListArea" class="space-y-2"></div>
+        <div class="space-y-2">
+          <label for="newFolderInput" class="text-sm font-medium text-[#44506B]">Create folder</label>
+    <div class="mt-4">
+  <label for="newFolderInput" class="font-semibold text-sm text-[#44506B]">Create folder</label>
+  <input id="newFolderInput" placeholder="e.g. Maths" class="w-full p-3 rounded-xl border border-gray-300 focus:border-[#725CAD] focus:ring-1 focus:ring-[#725CAD]" />
+  <button id="createFolderBtn" class="w-full mt-2 bg-gradient-to-b from-[#725CAD] to-[#5C3FAC] text-white font-bold py-2 px-4 rounded-xl shadow-md relative overflow-hidden">
+    Create Folder
+  </button>
+</div>
+
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="md:col-span-3 space-y-6">
+
+        <!-- Upload Panel -->
+        <section class="bg-white/90 rounded-xl shadow-lg p-6 space-y-4">
+          <div class="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
+            <h2 class="text-[#0B1D51] font-bold text-xl">Upload Notes & Files</h2>
+            <div class="flex gap-2 flex-wrap">
+              <input id="search" placeholder="Search files, tags, folders..." class="p-2 rounded-lg border border-gray-200 flex-1">
+              <select id="sort" class="p-2 rounded-lg border border-gray-200">
+                <option value="date">Sort: Newest</option>
+                <option value="name">Sort: Name</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-6">
+            <!-- Dropzone -->
+            <div id="dropzone" tabindex="0" class="flex-1 min-h-[180px] border-2 border-dashed border-gray-300 rounded-xl flex flex-col justify-center items-center gap-2 hover:bg-blue-100 transition">
+              <p class="font-semibold text-[#44506B]">Drag & Drop files here</p>
+              <p class="text-sm text-[#44506B]">or click <button id="pickFileBtn" class="px-3 py-1 rounded-lg border border-gray-300 hover:bg-gray-100 transition">Browse</button> to choose</p>
+              <p class="text-xs text-[#44506B]">Supported: PDF, PNG, JPG, TXT, DOCX</p>
+              <input id="hiddenFileInput" type="file" class="hidden" multiple>
+            </div>
+
+            <!-- Meta -->
+            <div class="flex-1 space-y-3">
+              <label for="titleInput" class="text-sm font-medium text-[#44506B]">Title</label>
+              <input id="titleInput" type="text" placeholder="Short descriptive title" class="w-full p-2 rounded-lg border border-gray-200">
+
+              <label for="tagsInput" class="text-sm font-medium text-[#44506B]">Tags (comma separated)</label>
+              <input id="tagsInput" type="text" placeholder="e.g. algebra, chapter1" class="w-full p-2 rounded-lg border border-gray-200">
+
+              <label for="folderInput" class="text-sm font-medium text-[#44506B]">Folder</label>
+              <input id="folderInput" type="text" placeholder="Type or choose existing" class="w-full p-2 rounded-lg border border-gray-200">
+
+              <div class="flex gap-2 mt-2">
+                <button id="uploadBtn" class="flex-1 px-4 py-2 font-bold rounded-xl bg-gradient-to-br from-[#725CAD] to-[#5C3FAC] text-white shadow-lg hover:scale-105 transition">Upload</button>
+                <button id="clearBtn" class="flex-1 px-4 py-2 font-semibold rounded-xl border border-gray-300 hover:bg-gray-100 transition">Clear</button>
+              </div>
+
+              <!-- Upload progress -->
+              <div id="uploadProgressWrap" class="hidden">
+                <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                  <div id="uploadProgress" class="h-full w-0 bg-gradient-to-r from-[#725CAD] to-[#8CCDEB] transition-all"></div>
+                </div>
+                <div class="text-xs text-[#44506B] mt-1">Uploading… <span id="uploadProgressLabel">0%</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Files Panel -->
+        <section class="bg-white/90 rounded-xl shadow-lg p-6">
+          <h3 class="font-bold text-[#0B1D51] mb-3">Files</h3>
+          <div id="noFilesMessage" class="text-[#44506B]">No files yet — upload your first note.</div>
+          <div id="filesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2"></div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <div id="modal" class="hidden"></div>
+
+  <!-- Your JS logic for drag/drop, folder, upload handling remains unchanged -->
+  <script src="notes.js"></script>
+</body>
+</html>
